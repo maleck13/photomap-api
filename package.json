@@ -1,0 +1,19 @@
+{
+  "name": "photomap",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.9.8",
+    "nodemon": "~1.2.1",
+    "rabbit": "0.0.5",
+    "mongoose": "~3.8.17",
+    "async": "~0.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
