@@ -7,7 +7,11 @@ module.exports = function (){
   return{
     "getMongoUrl": function (){
       return config.mongourl;
+    },
+    "getRabbitUrl": function (){
+      return config.rabbiturl;
     }
+
   }
 
 

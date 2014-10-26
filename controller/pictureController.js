@@ -1,5 +1,7 @@
 var PictureModel = require('../model/picture');
 var async = require('async');
+var fs = require('fs');
+var path = require('path');
 
 module.exports = function (){
 
@@ -25,6 +27,23 @@ module.exports = function (){
       });
     },
 
+    "getPicsFromDateRange" : function (req,res){
+      var from = req.params.from;
+      var to = req.params.to;
+      var pic = new PictureModel();
+      async.series([function find(callback){
+        pic.findInTimeRange(from,to,callback);
+      }],function complete(err,ok){
+        var ret;
+        if(err) {
+          ret = {"error":"error finding range","code":err.code || 500, err:err.message || err};
+        }else{
+          ret = ok[0];
+        }
+        res.json(ret);
+      });
+    },
+
     "getYearRange" : function (req,res){
       async.series([
         function getRange(callback){
@@ -41,6 +60,30 @@ module.exports = function (){
         res.json(ret);
 
       });
+    },
+
+    "serveImage": function (req,res){
+      var filePath = req.query.filePath; //obv make this more secure
+      console.log("filePath" ,filePath);
+      fs.exists(filePath, function (does){
+        if(! does){
+          return res.end(404);
+        }
+        var ext = path.extname(filePath);
+        var contentType = 'text/plain';
+        if (ext === '.JPEG') {
+          contentType = 'image/jpeg'
+        }
+        res.writeHead(200, {'Content-Type': contentType });
+        // stream the file
+        fs.createReadStream(filePath, 'utf-8').pipe(res);
+      });
+    },
+    "uploadImage" : function (req,res){
+      if(app.rabbit.writable){
+        app.rabbit.write(JSON.stringify({"":""}))
+      }
+      req.json({"message":"done"});
     }
   }
 };

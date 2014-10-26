@@ -20,6 +20,11 @@ PictureSchema.methods.yearRange = function(user,cb){
   return this.model('Picture').distinct('year',{"user":user}).exec(cb);
 };
 
+
+PictureSchema.methods.findInTimeRange = function(from,to,cb){
+  console.log("from :", from, " to : ",to);
+return this.model('Picture').find({}).where('timestamp').gte(from).lte(to).exec(cb);
+};
 //PictureSchema.methods.findUpdate = function (cb){
 //  var self = this;
 //  this.model('Picture').find({}, function (err, res){
@@ -43,4 +48,3 @@ PictureSchema.methods.yearRange = function(user,cb){
 
 module.exports = mongoose.model('Picture', PictureSchema);
 
-//mongodb://apiuser:Aw3Se4Dr5@ds033170.mongolab.com:33170/photomap
