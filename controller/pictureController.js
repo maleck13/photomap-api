@@ -65,16 +65,22 @@ module.exports = function (){
     "serveImage": function (req,res){
       var filePath = req.query.filePath; //obv make this more secure
       console.log("filePath" ,filePath);
+      if(!filePath || filePath.substr(0,9) !== "/opt/data"){
+        res.status(401);
+        res.json({"message":"no allowed"});
+      }
       fs.exists(filePath, function (does){
         if(! does){
-          return res.end(404);
+          res.status(404)
+          return res.json(404);
         }
         var ext = path.extname(filePath);
         var contentType = 'text/plain';
         if (ext === '.JPEG') {
           contentType = 'image/jpeg'
         }
-        res.writeHead(200, {'Content-Type': contentType });
+        var expire = (60 * 24) * 365;
+        res.writeHead(200, {'Content-Type': contentType, "cache-control":"max-age="+expire });
         // stream the file
         fs.createReadStream(filePath, 'utf-8').pipe(res);
       });
@@ -83,7 +89,7 @@ module.exports = function (){
       if(app.rabbit.writable){
         app.rabbit.write(JSON.stringify({"":""}))
       }
-      req.json({"message":"done"});
+      res.json({"message":"done"});
     }
   }
 };
