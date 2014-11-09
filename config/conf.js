@@ -1,4 +1,5 @@
-var config = require(process.env.PHOTOMAP_CONF);
+var confLoc = process.env.PHOTOMAP_CONF || "/etc/photomap/conf.json"
+var config = require(confLoc);
 
 console.log("conf set up from " + process.env.PHOTOMAP_CONF);
 
@@ -10,6 +11,9 @@ module.exports = function (){
     },
     "getRabbitUrl": function (){
       return config.rabbiturl;
+    },
+    "getPicDir": function (){
+      return config.picdir;
     }
 
   }

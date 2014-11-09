@@ -9,11 +9,12 @@
     "mongoose": "~3.8.17",
     "async": "~0.9.0",
     "amqp": "~0.2.0",
-    "rabbit.js": "~0.4.1"
+    "rabbit.js": "~0.4.1",
+    "formidable": "~1.0.15"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC"
