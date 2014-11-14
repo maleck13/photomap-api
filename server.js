@@ -27,7 +27,9 @@ rabbit.on('ready', function() {
   app.listen(process.env.PORT || 8080);
 });
 
-rabbit.on('error',console.error);
+rabbit.on('error',function(err){
+  console.log("error connecting to rabbit ", err);
+});
 
 
 
