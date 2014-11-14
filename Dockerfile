@@ -3,4 +3,4 @@ FROM node:0.10-onbuild
 EXPOSE 8080
 COPY . /src
 RUN mkdir -p /etc/photomap
-COPY ./conf.json /etc/photomap/conf.json
+#COPY ./conf.json /etc/photomap/conf.json
