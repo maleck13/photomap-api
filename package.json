@@ -1,7 +1,8 @@
 {
   "name": "photomap",
   "version": "0.0.0",
-  "description": "",
+  "description": "rest api for photomap.me",
+  "repository":"",
   "main": "server.js",
   "dependencies": {
     "express": "~4.9.8",
