@@ -28,7 +28,8 @@ rabbit.on('ready', function() {
 });
 
 rabbit.on('error',function(err){
-  console.log("error connecting to rabbit ", err);
+  console.log("error connecting to rabbit I need rabbit ", err);
+  process.exit(1);
 });
 
 
